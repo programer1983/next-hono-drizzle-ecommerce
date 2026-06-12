@@ -1,31 +1,16 @@
-# --- Системные файлы и логи ---
-.DS_Store
-Thumbs.db
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# --- Зависимости (общие для фронта и бэка) ---
+# Зависимости и логи
 node_modules/
 dist/
-build/
+*.log
 
-# --- Настройки Next.js (Фронтенд) ---
+# Фронтенд (Next.js)
 frontend/.next/
 frontend/out/
 
-# --- Секреты и переменные окружения ---
-# Игнорируем файлы .env, так как в них хранятся пароли и ключи
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-*.env.local
+# Бэкенд (TypeScript сборка)
+backend/dist/
+backend/build/
 
-# --- Специфичные файлы инструментов ---
-.eslintcache
-.vercel
-.turbo
+# Секреты
+.env
+*.env.local
