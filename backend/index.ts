@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
+import { clerkMiddleware, getAuth } from "@clerk/hono";
 
 const app = new Hono();
 
@@ -11,6 +12,8 @@ app.use(
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   }),
 );
+
+app.use("*", clerkMiddleware());
 
 app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
