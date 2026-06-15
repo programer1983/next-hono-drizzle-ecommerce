@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
 import { clerkMiddleware, getAuth } from "@clerk/hono";
+import "dotenv/config";
 
 const app = new Hono();
 
