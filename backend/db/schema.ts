@@ -16,6 +16,10 @@ export type CheckoutSessionLine = {
   unitPriceCents: number;
 };
 
+// ============= SCHEMA  ==========================================================================================
+
+// ============= USERS ==================
+
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   clerkUserId: text("clerk_user_id").notNull().unique(),
@@ -29,6 +33,8 @@ export const users = pgTable("users", {
     .defaultNow()
     .notNull(),
 });
+
+// ============= PRODUCTS ===============
 
 export const products = pgTable("products", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -47,6 +53,8 @@ export const products = pgTable("products", {
     .notNull(),
 });
 
+// ============= CHECKOUTSESSION =========
+
 export const checkOutSessions = pgTable("checkout_sessions", {
   id: uuid("id").defaultRandom().primaryKey(),
   userId: uuid("user_id")
@@ -60,6 +68,8 @@ export const checkOutSessions = pgTable("checkout_sessions", {
     .defaultNow()
     .notNull(),
 });
+
+// ============= ORDERS ===================
 
 export const orders = pgTable("orders", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -78,14 +88,43 @@ export const orders = pgTable("orders", {
     .notNull(),
 });
 
+// ============= ORDERITEM ==================
+
 export const orderItems = pgTable("order_items", {
   id: uuid("id").defaultRandom().primaryKey(),
-  userId: uuid("user_id")
+  orderId: uuid("order_id")
     .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+    .references(() => orders.id, { onDelete: "cascade" }),
   productId: uuid("product_id")
     .notNull()
     .references(() => products.id, { onDelete: "restrict" }),
   quantity: integer("quantity").notNull(),
   unitPriceCents: integer("unit_price_cents").notNull(),
 });
+
+// ============= RELATIONS ==========================================================================================
+
+// ============= USERS ================
+export const usersRelations = relations(users, ({ many }) => ({
+  orders: many(orders),
+}));
+
+// ============= PRODUCTS ================
+export const productsRelations = relations(products, ({ many }) => ({
+  orderItems: many(orderItems),
+}));
+
+// ============= ORDERS ================
+export const ordersRelations = relations(orders, ({ one, many }) => ({
+  user: one(users, { fields: [orders.userId], references: [users.id] }),
+  item: many(orderItems),
+}));
+
+// ============= ORDERITEM ================
+export const orderItemRelations = relations(orderItems, ({ one }) => ({
+  order: one(orders, { fields: [orderItems.orderId], references: [orders.id] }),
+  product: one(products, {
+    fields: [orderItems.productId],
+    references: [products.id],
+  }),
+}));
