@@ -1,16 +1,20 @@
+import "dotenv/config";
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
 import { clerkMiddleware, getAuth } from "@clerk/hono";
-import "dotenv/config";
 import { bodyLimit } from "hono/body-limit";
+import { clerkWebhookHandler } from "./webhooks/clerk.js";
+import { getEnv } from "./lib/validation.js";
+
+const env = getEnv();
 
 const app = new Hono();
 
 app.use(
   "/api/*",
   cors({
-    origin: "http://localhost:3000",
+    origin: env.FRONTEND_URL,
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   }),
 );
@@ -29,13 +33,11 @@ app.post("/webhooks/clerk", sizeLimiter, async (c) => {
   return c.json({ success: true });
 });
 
-
-
 app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
 });
 
-const port = Number(process.env.PORT) || 4000;
+const port = env.PORT;
 
 console.log(`Server is running on port ${port}`);
 
