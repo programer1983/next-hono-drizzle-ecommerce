@@ -39,7 +39,7 @@ export async function clerkWebhookHandler(c: Context) {
         [u.first_name, u.last_name].filter(Boolean).join(" ") ||
         u.username ||
         null;
-      const role = parseRole(u.public_metadata?.role);
+      // const role = parseRole(u.public_metadata?.role);
 
       await db
         .insert(users)
@@ -47,11 +47,10 @@ export async function clerkWebhookHandler(c: Context) {
           clerkUserId: u.id,
           email,
           displayName,
-          role,
         })
         .onConflictDoUpdate({
           target: users.clerkUserId,
-          set: { email, displayName, role, updatedAt: new Date() },
+          set: { email, displayName, updatedAt: new Date() },
         });
     }
 

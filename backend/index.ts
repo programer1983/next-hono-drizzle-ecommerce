@@ -19,18 +19,24 @@ app.use(
   }),
 );
 
-app.use("*", clerkMiddleware());
+// app.use("*", clerkMiddleware());
+
+app.use("*", async (c, next) => {
+  if (c.req.path === "/webhooks/clerk") {
+    return await next();
+  }
+  return clerkMiddleware()(c, next);
+});
 
 const sizeLimiter = bodyLimit({
   maxSize: 1 * 1024 * 1024,
   onError: (c) => c.text("Payload Too Large", 413),
 });
 
-app.post("/webhooks/clerk", sizeLimiter, async (c) => {
-  const rawBody = await c.req.text();
-  await clerkWebhookHandler(c, rawBody);
+app.use("/webhooks/clerk", sizeLimiter);
 
-  return c.json({ success: true });
+app.post("/webhooks/clerk", async (c) => {
+  return await clerkWebhookHandler(c);
 });
 
 app.get("/", (c) => {
