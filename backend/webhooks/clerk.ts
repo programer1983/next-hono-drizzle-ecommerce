@@ -2,9 +2,19 @@ import type { Context } from "hono";
 import { getEnv } from "../lib/validation.js";
 import { eq } from "drizzle-orm";
 import { Webhook } from "svix";
-import type { WebhookEvent } from "@clerk/backend";
-import { users } from "../db/schema.js";
+import { type WebhookEvent } from "@clerk/backend";
 import { db } from "../db/index.js";
+import { users, type UserRole } from "../db/schema.js";
+function parseRole(role: unknown): UserRole {
+  if (
+    typeof role === "string" &&
+    (role === "customer" || role === "support" || role === "admin")
+  ) {
+    return role as UserRole;
+  }
+  return "customer";
+}
+
 export async function clerkWebhookHandler(c: Context) {
   const env = getEnv();
   try {
@@ -39,7 +49,10 @@ export async function clerkWebhookHandler(c: Context) {
         [u.first_name, u.last_name].filter(Boolean).join(" ") ||
         u.username ||
         null;
-      // const role = parseRole(u.public_metadata?.role);
+      const role = parseRole(u.public_metadata?.role);
+      // console.log("user id:", u.id);
+      // console.log("public_metadata:", JSON.stringify(u.public_metadata));
+      // console.log("role raw:", u.public_metadata?.role);
 
       await db
         .insert(users)
@@ -47,10 +60,11 @@ export async function clerkWebhookHandler(c: Context) {
           clerkUserId: u.id,
           email,
           displayName,
+          role,
         })
         .onConflictDoUpdate({
           target: users.clerkUserId,
-          set: { email, displayName, updatedAt: new Date() },
+          set: { email, displayName, role, updatedAt: new Date() },
         });
     }
 
