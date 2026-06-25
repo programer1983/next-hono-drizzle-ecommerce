@@ -6,6 +6,8 @@ import { clerkMiddleware, getAuth } from "@clerk/hono";
 import { bodyLimit } from "hono/body-limit";
 import { clerkWebhookHandler } from "./webhooks/clerk.js";
 import { getEnv } from "./lib/validation.js";
+import meRouter from "./routes/meRoutes.js";
+import productRouter from "./routes/productRouters.js";
 
 const env = getEnv();
 
@@ -34,6 +36,9 @@ const sizeLimiter = bodyLimit({
 });
 
 app.use("/webhooks/clerk", sizeLimiter);
+
+app.route("/api/me", meRouter);
+app.route("/api/products", productRouter);
 
 app.post("/webhooks/clerk", async (c) => {
   return await clerkWebhookHandler(c);

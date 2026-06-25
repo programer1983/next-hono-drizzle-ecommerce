@@ -16,6 +16,7 @@
     "@clerk/hono": "^0.1.36",
     "@hono/node-server": "^2.0.4",
     "@neondatabase/serverless": "^1.1.0",
+    "cron": "^4.4.0",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "hono": "^4.12.25",
