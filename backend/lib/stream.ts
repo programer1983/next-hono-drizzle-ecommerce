@@ -6,6 +6,7 @@ export type Env = {
   Bindings: {
     STREAM_API_KEY: string;
     STREAM_API_SECRET: string;
+    CLERK_SECRET_KEY: string;
   };
 };
 

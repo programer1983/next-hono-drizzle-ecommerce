@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@clerk/backend": "^3.8.4",
     "@clerk/hono": "^0.1.36",
     "@hono/node-server": "^2.0.4",
     "@neondatabase/serverless": "^1.1.0",

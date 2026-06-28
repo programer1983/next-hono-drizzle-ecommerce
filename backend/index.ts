@@ -8,7 +8,7 @@ import { clerkWebhookHandler } from "./webhooks/clerk.js";
 import { getEnv } from "./lib/validation.js";
 import meRouter from "./routes/meRoutes.js";
 import productRouter from "./routes/productRouters.js";
-import streamRouter from "./routes/streamRouter.js"
+import streamRouter from "./routes/streamRouter.js";
 
 const env = getEnv();
 
