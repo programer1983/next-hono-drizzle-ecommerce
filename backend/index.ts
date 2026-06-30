@@ -9,6 +9,7 @@ import { getEnv } from "./lib/validation.js";
 import meRouter from "./routes/meRoutes.js";
 import productRouter from "./routes/productRouters.js";
 import streamRouter from "./routes/streamRouter.js";
+import checkoutRouter from "./routes/checkoutRouter.js";
 
 const env = getEnv();
 
@@ -41,10 +42,15 @@ app.use("/webhooks/clerk", sizeLimiter);
 app.route("/api/me", meRouter);
 app.route("/api/products", productRouter);
 app.route("/api/stream", streamRouter);
+app.route("/api/checkout", checkoutRouter);
 
 app.post("/webhooks/clerk", async (c) => {
   return await clerkWebhookHandler(c);
 });
+
+// app.post("/webhooks/polar", async (c) => {
+//   return await polarWebhookHandler(c);
+// });
 
 app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
