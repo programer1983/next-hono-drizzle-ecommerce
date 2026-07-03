@@ -10,6 +10,7 @@ import meRouter from "./routes/meRoutes.js";
 import productRouter from "./routes/productRouters.js";
 import streamRouter from "./routes/streamRouter.js";
 import checkoutRouter from "./routes/checkoutRouter.js";
+import { polarWebhookHandler } from "./webhooks/polar.js";
 
 const env = getEnv();
 
@@ -48,9 +49,9 @@ app.post("/webhooks/clerk", async (c) => {
   return await clerkWebhookHandler(c);
 });
 
-// app.post("/webhooks/polar", async (c) => {
-//   return await polarWebhookHandler(c);
-// });
+app.post("/webhooks/polar", async (c) => {
+  return await polarWebhookHandler(c);
+});
 
 app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
