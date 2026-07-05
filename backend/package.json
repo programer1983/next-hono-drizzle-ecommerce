@@ -15,15 +15,16 @@
   "dependencies": {
     "@clerk/backend": "^3.8.4",
     "@clerk/hono": "^0.1.43",
-    "@hono/node-server": "^2.0.4",
+    "@hono/node-server": "^2.0.8",
     "@hono/zod-validator": "^0.8.0",
     "@neondatabase/serverless": "^1.1.0",
+    "@sentry/hono": "^10.63.0",
     "@sentry/node": "^10.63.0",
     "@sentry/profiling-node": "^10.63.0",
     "cron": "^4.4.0",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
-    "hono": "^4.12.25",
+    "hono": "^4.12.27",
     "stream-chat": "^9.47.1",
     "svix": "^1.96.0",
     "zod": "^4.4.3"

@@ -1,8 +1,11 @@
 import "dotenv/config";
+import * as Sentry from "@sentry/hono/node";
+import { nodeProfilingIntegration } from "@sentry/profiling-node";
+
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
-import { clerkMiddleware, getAuth } from "@clerk/hono";
+import { clerkMiddleware } from "@clerk/hono";
 import { bodyLimit } from "hono/body-limit";
 import { clerkWebhookHandler } from "./webhooks/clerk.js";
 import { getEnv } from "./lib/validation.js";
@@ -14,7 +17,21 @@ import { polarWebhookHandler } from "./webhooks/polar.js";
 
 const env = getEnv();
 
+if (env.SENTRY_DSN) {
+  Sentry.init({
+    dsn: env.SENTRY_DSN,
+    environment: env.NODE_ENV ?? "development",
+    enableLogs: true,
+    tracesSampleRate: 1.0,
+    sendDefaultPii: true,
+    integrations: [nodeProfilingIntegration()],
+    profilesSampleRate: 1.0,
+  } as Sentry.NodeOptions);
+}
+
 const app = new Hono();
+
+app.use("*", Sentry.sentry(app));
 
 app.use(
   "/api/*",
@@ -23,8 +40,6 @@ app.use(
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   }),
 );
-
-// app.use("*", clerkMiddleware());
 
 app.use("*", async (c, next) => {
   if (c.req.path === "/webhooks/clerk") {
@@ -57,6 +72,18 @@ app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
 });
 
+app.onError((err, c) => {
+  Sentry.captureException(err);
+
+  return c.json(
+    {
+      error: "Internal Server Error",
+      message: env.NODE_ENV === "development" ? err.message : undefined,
+    },
+    500,
+  );
+});
+
 const port = env.PORT;
 
 console.log(`Server is running on port ${port}`);
@@ -69,3 +96,5 @@ serve({
 export default app;
 
 //ngrok http 4000
+
+//docker compose up
