@@ -13,6 +13,7 @@ import meRouter from "./routes/meRoutes.js";
 import productRouter from "./routes/productRouters.js";
 import streamRouter from "./routes/streamRouter.js";
 import checkoutRouter from "./routes/checkoutRouter.js";
+import adminRouter from "./routes/adminRouter.js";
 import { polarWebhookHandler } from "./webhooks/polar.js";
 import { sentryClerkUserMiddleware } from "./middleware/sentryClerckUser.js";
 
@@ -62,6 +63,7 @@ app.route("/api/me", meRouter);
 app.route("/api/products", productRouter);
 app.route("/api/stream", streamRouter);
 app.route("/api/checkout", checkoutRouter);
+app.route("/api/admin", adminRouter);
 
 app.post("/webhooks/clerk", clerkWebhookHandler);
 app.post("/webhooks/polar", polarWebhookHandler);
