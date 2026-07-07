@@ -14,6 +14,7 @@ import productRouter from "./routes/productRouters.js";
 import streamRouter from "./routes/streamRouter.js";
 import checkoutRouter from "./routes/checkoutRouter.js";
 import { polarWebhookHandler } from "./webhooks/polar.js";
+import { sentryClerkUserMiddleware } from "./middleware/sentryClerckUser.js";
 
 const env = getEnv();
 
@@ -48,6 +49,8 @@ app.use("*", async (c, next) => {
   return clerkMiddleware()(c, next);
 });
 
+app.use("/api/*", sentryClerkUserMiddleware());
+
 const sizeLimiter = bodyLimit({
   maxSize: 1 * 1024 * 1024,
   onError: (c) => c.text("Payload Too Large", 413),
@@ -60,13 +63,8 @@ app.route("/api/products", productRouter);
 app.route("/api/stream", streamRouter);
 app.route("/api/checkout", checkoutRouter);
 
-app.post("/webhooks/clerk", async (c) => {
-  return await clerkWebhookHandler(c);
-});
-
-app.post("/webhooks/polar", async (c) => {
-  return await polarWebhookHandler(c);
-});
+app.post("/webhooks/clerk", clerkWebhookHandler);
+app.post("/webhooks/polar", polarWebhookHandler);
 
 app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
