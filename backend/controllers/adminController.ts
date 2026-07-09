@@ -9,6 +9,7 @@ import { db } from "../db/index.js";
 import { desc, eq, count } from "drizzle-orm";
 import { zValidator } from "@hono/zod-validator";
 import { createFactory } from "hono/factory";
+import { isAdmin } from "../lib/roles.js";
 
 const env = getEnv();
 
