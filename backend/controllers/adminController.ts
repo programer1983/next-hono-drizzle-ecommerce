@@ -10,6 +10,7 @@ import { desc, eq, count } from "drizzle-orm";
 import { zValidator } from "@hono/zod-validator";
 import { createFactory } from "hono/factory";
 import { isAdmin } from "../lib/roles.js";
+import { deleteImageKitAsset } from "../lib/imagekit.js";
 
 const env = getEnv();
 
