@@ -9,11 +9,12 @@ import { clerkMiddleware } from "@clerk/hono";
 import { bodyLimit } from "hono/body-limit";
 import { clerkWebhookHandler } from "./webhooks/clerk.js";
 import { getEnv } from "./lib/validation.js";
-import meRouter from "./routes/meRoutes.js";
-import productRouter from "./routes/productRouters.js";
+import meRouter from "./routes/meRoute.js";
+import productRouter from "./routes/productRouter.js";
 import streamRouter from "./routes/streamRouter.js";
 import checkoutRouter from "./routes/checkoutRouter.js";
 import adminRouter from "./routes/adminRouter.js";
+import orderRouter from "./routes/orderRouter.js";
 import { polarWebhookHandler } from "./webhooks/polar.js";
 import { sentryClerkUserMiddleware } from "./middleware/sentryClerckUser.js";
 
@@ -64,6 +65,7 @@ app.route("/api/products", productRouter);
 app.route("/api/stream", streamRouter);
 app.route("/api/checkout", checkoutRouter);
 app.route("/api/admin", adminRouter);
+app.route("/api/orders", orderRouter);
 
 app.post("/webhooks/clerk", clerkWebhookHandler);
 app.post("/webhooks/polar", polarWebhookHandler);

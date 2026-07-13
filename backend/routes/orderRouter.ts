@@ -1,0 +1,16 @@
+import { Hono } from "hono";
+import {
+  createStreamChannel,
+  createVideoInvite,
+  getOrder,
+  listOrders,
+} from "../controllers/orderController.js";
+
+const router = new Hono();
+
+router.get("/", listOrders);
+router.get("/:id", getOrder);
+router.post("/:id/stream-channel", createStreamChannel);
+router.post("/:id/video-invite", createVideoInvite);
+
+export default router;
