@@ -100,3 +100,5 @@ export default app;
 //ngrok http 4000
 
 //docker compose up
+
+//docker compose up backend
