@@ -20,6 +20,8 @@ import { sentryClerkUserMiddleware } from "./middleware/sentryClerckUser.js";
 
 const env = getEnv();
 
+const app = new Hono();
+
 if (env.SENTRY_DSN) {
   Sentry.init({
     dsn: env.SENTRY_DSN,
@@ -31,8 +33,6 @@ if (env.SENTRY_DSN) {
     profilesSampleRate: 1.0,
   } as Sentry.NodeOptions);
 }
-
-const app = new Hono();
 
 app.use("*", Sentry.sentry(app));
 
@@ -96,9 +96,3 @@ serve({
 });
 
 export default app;
-
-//ngrok http 4000
-
-//docker compose up
-
-//docker compose up backend
