@@ -3,6 +3,7 @@ import * as Sentry from "@sentry/nextjs";
 const raw = process.env.NEXT_PUBLIC_API_URL; //  ИСПРАВЛЕНО
 const base = typeof raw === "string" ? raw.replace(/\/+$/, "") : "";
 
+// TOKEN GENERATION ADD SENTRY/CLERK INTEGRATION
 export async function apiFetch(path, opts = {}) {
   const { getToken, method = "GET", body } = opts;
   const headers = { "Content-Type": "application/json" };
