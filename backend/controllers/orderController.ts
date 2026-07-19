@@ -11,7 +11,6 @@ import {
   streamChatDisplayName,
   streamUserId,
 } from "../lib/stream.js";
-import { Environment } from "svix/dist/api/environment.js";
 
 const env = getEnv();
 
