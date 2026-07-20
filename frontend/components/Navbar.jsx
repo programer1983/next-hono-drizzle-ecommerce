@@ -1,6 +1,7 @@
 "use client";
 
 import { apiFetch } from "@/lib/api";
+import { useCart } from "@/store/cart";
 import { Show, SignInButton, useAuth, UserButton } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -24,7 +25,9 @@ const Navbar = () => {
 
   const role = meData?.user?.role;
 
-  const cartCount = 5;
+  const cartCount = useCart((s) =>
+    s.items.reduce((n, line) => n + line.quantity, 0),
+  );
 
   return (
     <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100/95 shadow-sm backdrop-blur-md">
