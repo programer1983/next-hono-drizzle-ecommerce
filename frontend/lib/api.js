@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/nextjs";
 
-const raw = process.env.NEXT_PUBLIC_API_URL; //  ИСПРАВЛЕНО
+const raw = process.env.NEXT_PUBLIC_API_URL;
 const base = typeof raw === "string" ? raw.replace(/\/+$/, "") : "";
 
 // TOKEN GENERATION ADD SENTRY/CLERK INTEGRATION
