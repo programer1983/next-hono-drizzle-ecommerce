@@ -4,6 +4,7 @@ import PageLoader from "@/components/PageLoader";
 import { useHomeCatalog } from "@/hooks/useHomeCatalog";
 import { useAuth } from "@clerk/nextjs";
 import { HomeHero } from "./HomeHero";
+import { TrustStrip } from "./TrustStrip";
 
 export default function Home() {
   const { isLoaded } = useAuth();
@@ -25,6 +26,7 @@ export default function Home() {
   return (
     <div className="space-y-12">
       <HomeHero categories={categories} loadingCategories={loadingCategories} />
+      <TrustStrip />
     </div>
   );
 }
