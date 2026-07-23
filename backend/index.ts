@@ -17,10 +17,19 @@ import adminRouter from "./routes/adminRouter.js";
 import orderRouter from "./routes/orderRouter.js";
 import { polarWebhookHandler } from "./webhooks/polar.js";
 import { sentryClerkUserMiddleware } from "./middleware/sentryClerckUser.js";
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
 
 const env = getEnv();
 
 const app = new Hono();
+
+const pool = new pg.Pool({
+  connectionString: env.DATABASE_URL,
+  max: 5,
+});
+
+export const db = drizzle(pool);
 
 if (env.SENTRY_DSN) {
   Sentry.init({
