@@ -5,6 +5,7 @@ import { useHomeCatalog } from "@/hooks/useHomeCatalog";
 import { useAuth } from "@clerk/nextjs";
 import { HomeHero } from "./HomeHero";
 import { TrustStrip } from "./TrustStrip";
+import PageError from "./PageError";
 
 export default function Home() {
   const { isLoaded } = useAuth();
