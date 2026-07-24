@@ -19,9 +19,9 @@ export default function Home() {
     error,
   } = useHomeCatalog();
 
-  if (!isLoaded) {
-    return <PageLoader />;
-  }
+  // if (!isLoaded) {
+  //   return <PageLoader />;
+  // }
 
   return (
     <div className="space-y-12">
@@ -46,7 +46,7 @@ export default function Home() {
               ? [1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="sceleton h-8 w-20 rounded-lg"
+                    className="skeleton h-8 w-20 rounded-lg"
                     aria-hidden
                   />
                 ))
@@ -61,6 +61,34 @@ export default function Home() {
                 ))}
           </div>
         </div>
+
+        {loadingList ? (
+          <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <li key={i}>
+                <div
+                  key={i}
+                  className="skeleton h-96 w-full rounded-box"
+                  aria-hidden
+                />
+              </li>
+            ))}
+          </ul>
+        ) : error ? (
+          <PageError message="We couldn't load products. Please try again in a moment." />
+        ) : products.length === 0 ? (
+          <div className="rounded-box border border-base-300 bg-base-100 py-16 text-center text-base-content/60">
+            No products in this category yet.
+          </div>
+        ) : (
+          <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {products.map((p) => (
+              <li key={p.id}>
+                <CatalogProductCard product={p} />
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
     </div>
   );
