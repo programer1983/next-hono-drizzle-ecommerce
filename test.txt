@@ -1,5 +1,7 @@
-//ngrok http 4000
+ngrok http 4000
 
-//docker compose up
+docker compose up
 
-//docker compose up backend
+docker compose up backend
+
+docker compose up --build
