@@ -1,5 +1,6 @@
-import { imageKitOptimizedUrl } from "@/lib/imagekitUrl";
+import { imageKitOptimizedUrl, IK_PRESETS } from "@/lib/imagekitUrl";
 import { useCart } from "@/store/cart";
+import { formatPrice } from "@/utils/format";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -12,7 +13,7 @@ export function CatalogProductCard({ product }) {
         href={`/product/${product.slug}`}
         className="relative block overflow-hidden"
       >
-        <figure className="aspect-4/3 bg-base-300">
+        <figure className="aspect-[4/3] relative overflow-hidden bg-base-300">
           {product.imageUrl ? (
             <img
               src={imageKitOptimizedUrl(
@@ -26,7 +27,9 @@ export function CatalogProductCard({ product }) {
             />
           ) : null}
 
-          <span>{product.category ?? "General"}</span>
+          <span className="badge badge-sm absolute left-3 top-3 border-0 bg-base-100/90 text-sm font-medium text-base-content/80 backdrop-blur">
+            {product.category ?? "General"}
+          </span>
         </figure>
       </Link>
       <div className="card-body grow gap-3 p-5 text-left">
@@ -48,7 +51,7 @@ export function CatalogProductCard({ product }) {
             className="btn btn-primary btn-sm gap-1 shadow"
             onClick={() => addItem(product.id)}
           >
-            <PlusIcon className="sizt-4" aria-hidden />
+            <PlusIcon className="size-4" aria-hidden />
             Add
           </button>
         </div>

@@ -29,10 +29,10 @@ export const useCart = create(
           });
           return;
         }
-        const items = get().items.map((item) =>
-          item.productId === productId ? { ...items, quantity } : item,
+        const updatedItems = get().items.map((item) =>
+          item.productId === productId ? { ...item, quantity } : item,
         );
-        set(items);
+        set({ items: updatedItems });
       },
       clear() {
         set({ items: [] });

@@ -1,14 +1,12 @@
 "use client";
 
-import PageLoader from "@/components/PageLoader";
 import { useHomeCatalog } from "@/hooks/useHomeCatalog";
-import { useAuth } from "@clerk/nextjs";
 import { HomeHero } from "./HomeHero";
 import { TrustStrip } from "./TrustStrip";
 import PageError from "./PageError";
+import { CatalogProductCard } from "./CatalogProductCard";
 
 export default function Home() {
-  const { isLoaded } = useAuth();
   const {
     categoryFilter,
     setCategory,
@@ -19,10 +17,6 @@ export default function Home() {
     loadingList,
     error,
   } = useHomeCatalog();
-
-  // if (!isLoaded) {
-  //   return <PageLoader />;
-  // }
 
   return (
     <div className="space-y-12">

@@ -45,7 +45,8 @@ export function useHomeCatalog() {
   });
 
   const categories = categoriesData?.categories ?? [];
-  const products = productsData?.products ?? [];
+  // const products = productsData?.products ?? [];
+  const products = productsData?.rows ?? [];
   const categoryChipsLoading = loadingCategories && categories.length === 0;
 
   return {
