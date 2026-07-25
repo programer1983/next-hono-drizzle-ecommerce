@@ -1,3 +1,4 @@
+import { imageKitOptimizedUrl } from "@/lib/imagekitUrl";
 import { useCart } from "@/store/cart";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
