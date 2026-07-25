@@ -1,0 +1,57 @@
+import { useCart } from "@/store/cart";
+import { PlusIcon } from "lucide-react";
+import Link from "next/link";
+
+export function CatalogProductCard({ product }) {
+  const addItem = useCart((s) => s.addItem);
+
+  return (
+    <article className="card group h-full overflow-hidden border border-base-300 bg-base-100 shadow-md transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-xl">
+      <Link
+        href={`/product/${product.slug}`}
+        className="relative block overflow-hidden"
+      >
+        <figure className="aspect-4/3 bg-base-300">
+          {product.imageUrl ? (
+            <img
+              src={imageKitOptimizedUrl(
+                product.imageUrl,
+                IK_PRESETS.catalogCard,
+              )}
+              alt=""
+              className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : null}
+
+          <span>{product.category ?? "General"}</span>
+        </figure>
+      </Link>
+      <div className="card-body grow gap-3 p-5 text-left">
+        <Link
+          href={`/product/${product.slug}`}
+          className="card-title line-clamp-2"
+        >
+          {product.name}
+        </Link>
+        <p className="line-clamp-3 text-sm leading-relaxed text-base-content/70">
+          {product.description}
+        </p>
+        <div className="card-actions mt-auto items-center justify-between border-t border-base-200 pt-4">
+          <span className="text-lg font-bold text-base-content tabular-nums">
+            {formatPrice(product.priceCents, product.currency)}
+          </span>
+          <button
+            type="button"
+            className="btn btn-primary btn-sm gap-1 shadow"
+            onClick={() => addItem(product.id)}
+          >
+            <PlusIcon className="sizt-4" aria-hidden />
+            Add
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
