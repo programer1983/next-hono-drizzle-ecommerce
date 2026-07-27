@@ -5,6 +5,8 @@ import { HomeHero } from "./HomeHero";
 import { TrustStrip } from "./TrustStrip";
 import PageError from "./PageError";
 import { CatalogProductCard } from "./CatalogProductCard";
+import { useAuth } from "@clerk/nextjs";
+import PageLoader from "./PageLoader";
 
 export default function Home() {
   const {
@@ -17,6 +19,12 @@ export default function Home() {
     loadingList,
     error,
   } = useHomeCatalog();
+
+  const { isLoaded } = useAuth();
+
+  if (!isLoaded) {
+    return <PageLoader />;
+  }
 
   return (
     <div className="space-y-12">
