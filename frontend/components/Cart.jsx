@@ -16,6 +16,7 @@ import Link from "next/link";
 import { formatPrice } from "@/utils/format";
 import { Show, SignInButton } from "@clerk/nextjs";
 import EmptyCart from "./EmptyCart";
+import { CartSkeleton } from "./LoadingSkeletons";
 
 function Cart() {
   const {
