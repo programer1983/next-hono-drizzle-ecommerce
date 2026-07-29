@@ -15,12 +15,12 @@ export default function EmptyCart() {
         when you are.
       </p>
       <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
-        <Link href="#catalog" className="btn btn-primary shadow-md gap-2">
+        <Link href="/#catalog" className="btn btn-primary shadow-md gap-2">
           Browse catalog
           <ArrowRightIcon className="size-4" aria-hidden />
         </Link>
         <Link
-          href="#orders"
+          href="/#orders"
           className="btn btn-ghost border border-white bg-base-100 hover:border-primary/35 hover:bg-base-200/50"
         >
           <PackageIcon className="size-4" aria-hidden />
