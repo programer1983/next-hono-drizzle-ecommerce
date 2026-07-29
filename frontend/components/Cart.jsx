@@ -15,6 +15,7 @@ import { IK_PRESETS, imageKitOptimizedUrl } from "@/lib/imagekitUrl";
 import Link from "next/link";
 import { formatPrice } from "@/utils/format";
 import { Show, SignInButton } from "@clerk/nextjs";
+import EmptyCart from "./EmptyCart";
 
 function Cart() {
   const {
