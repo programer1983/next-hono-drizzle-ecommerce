@@ -56,7 +56,7 @@ function Cart() {
                 className="card card-side border border-base-300 bg-base-100 shadow-sm"
               >
                 <figure className="p-4">
-                  {p.imageUrl ? (
+                  {p?.imageUrl ? (
                     <img
                       src={imageKitOptimizedUrl(
                         p.imageUrl,
@@ -108,7 +108,7 @@ function Cart() {
                           <MinusIcon className="size-4" aria-hidden />
                         </button>
                         <span
-                          className="join-item flex min-w-10 items-center justify-center bg-base-200 px-3 text-sm font-medium tabular-nums text-base-content"
+                          className="join-item flex min-w-10 items-center justify-center bg-base-200 px-3 text-sm font-medium tabular-nums border-none text-base-content"
                           aria-live="polite"
                         >
                           {line.quantity}

@@ -47,9 +47,9 @@ export const checkoutRoute = app.post(
       // We receive validated cart data
       const { items } = c.req.valid("json");
 
-      if (!env.POLAR_ACCESS_TOKEN) {
-        return c.json({ error: "Payments are not configured" }, 503);
-      }
+      // if (!env.POLAR_ACCESS_TOKEN) {
+      //   return c.json({ error: "Payments are not configured" }, 503);
+      // }
 
       // Checking account synchronization
       const localUser = await getLocalUser(userId);
@@ -110,33 +110,36 @@ export const checkoutRoute = app.post(
         return c.json({ message: "Failed to create checkout session" }, 500);
       }
 
-      const successUrl = `${env.FRONTEND_URL}/checkout/return?checkout_id={CHECKOUT_ID}`;
-      const returnUrl = `${env.FRONTEND_URL}/cart`;
+      // const successUrl = `${env.FRONTEND_URL}/checkout/return?checkout_id={CHECKOUT_ID}`;
+      // const returnUrl = `${env.FRONTEND_URL}/cart`;
+
+      const mockCheckoutId = `mock_polar_${session.id}`;
+      const successUrl = `${env.FRONTEND_URL || "http://localhost:3000"}/checkout/return?checkout_id=${mockCheckoutId}`;
 
       // Create a payment session in Polar
-      const checkout = await polarCreateCheckout(env, {
-        products: [env.POLAR_CHECKOUT_PRODUCT_ID],
-        prices: {
-          [env.POLAR_CHECKOUT_PRODUCT_ID]: [
-            {
-              amount_type: "fixed",
-              price_currency: "usd",
-              price_amount: totalCents,
-            },
-          ],
-        },
-        success_url: successUrl,
-        return_url: returnUrl,
-        external_customer_id: userId,
-        metadata: { checkout_session_id: session.id },
-      });
+      // const checkout = await polarCreateCheckout(env, {
+      //   products: [env.POLAR_CHECKOUT_PRODUCT_ID],
+      //   prices: {
+      //     [env.POLAR_CHECKOUT_PRODUCT_ID]: [
+      //       {
+      //         amount_type: "fixed",
+      //         price_currency: "usd",
+      //         price_amount: totalCents,
+      //       },
+      //     ],
+      //   },
+      //   success_url: successUrl,
+      //   return_url: returnUrl,
+      //   external_customer_id: userId,
+      //   metadata: { checkout_session_id: session.id },
+      // });
 
       await db
         .update(checkOutSessions)
-        .set({ polarCheckoutId: checkout.id })
+        .set({ polarCheckoutId: mockCheckoutId })
         .where(eq(checkOutSessions.id, session.id));
 
-      return c.json({ checkoutUrl: checkout.url });
+      return c.json({ checkoutUrl: successUrl });
     } catch (e) {
       throw e;
     }

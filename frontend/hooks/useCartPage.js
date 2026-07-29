@@ -22,11 +22,11 @@ export default function useCartPage() {
     enabled: items.length > 0,
   });
 
-  const products = data?.products ?? [];
-  const byId = new Map(products.map((p) => [p.id, p]));
+  const products = data?.rows ?? [];
+  const byId = new Map(products.map((p) => [String(p.id), p]));
   const lines = items.map((line) => ({
     line,
-    product: byId.get(line.productId) ?? null,
+    product: byId.get(String(line.productId)) ?? null,
   }));
 
   const subtotal = lines.reduce((sum, { line, product: p }) => {
