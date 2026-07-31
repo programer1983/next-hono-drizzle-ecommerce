@@ -49,7 +49,7 @@ const Navbar = () => {
             <span className="hidden sm:inline">Shop</span>
           </Link>
           <Show when="signed-in">
-            <Link href="/ordrs" className="btn btn-ghost gap-2 font-medium">
+            <Link href="/orders" className="btn btn-ghost gap-2 font-medium">
               <PackageIcon className="size-6 opacity-90" aria-hidden />
               <span className="hidden sm:inline">Orders</span>
             </Link>
