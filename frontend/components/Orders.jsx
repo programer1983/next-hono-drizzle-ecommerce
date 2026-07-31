@@ -6,11 +6,22 @@ import PageError from "./PageError";
 import { ChevronRightIcon, PackageIcon } from "lucide-react";
 import Link from "next/link";
 import { formatOrderWhen, formatPrice } from "@/utils/format";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Orders() {
   const { isLoading, error, staff, orders } = UseOrdersPage();
+  const { isLoaded, userId } = useAuth();
+  const router = useRouter();
 
-  if (isLoading) {
+  useEffect(() => {
+    if (isLoaded && !userId) {
+      router.push("/");
+    }
+  }, [isLoaded, userId, router]);
+
+  if (isLoading || !userId) {
     return (
       <div className="text-left">
         <div className="skeleton mb-2 h-10 w-64 max-w-full"></div>
