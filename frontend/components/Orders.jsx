@@ -9,6 +9,7 @@ import { formatOrderWhen, formatPrice } from "@/utils/format";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
+import OrderPreview from "./OrderPreview";
 
 export default function Orders() {
   const { isLoading, error, staff, orders } = UseOrdersPage();
@@ -75,7 +76,6 @@ export default function Orders() {
                 : lineCount === 1
                   ? `${totalUnits} ${totalUnits === 1 ? "item" : "items"}`
                   : `${lineCount} products · ${totalUnits} items`;
-
             return (
               <li key={o.id}>
                 <Link
