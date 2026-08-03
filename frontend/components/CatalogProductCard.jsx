@@ -10,7 +10,7 @@ export function CatalogProductCard({ product }) {
   return (
     <article className="card group h-full overflow-hidden border border-base-300 bg-base-100 shadow-md transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-xl">
       <Link
-        href={`/product/${product.slug}`}
+        href={`/products/${product.slug}`}
         className="relative block overflow-hidden"
       >
         <figure className="aspect-[4/3] relative overflow-hidden bg-base-300">
