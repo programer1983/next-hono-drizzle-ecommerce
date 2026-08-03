@@ -5,6 +5,7 @@ import { CheckCircle2Icon, ShoppingBagIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useCart } from "@/store/cart";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function CheckoutReturnPage() {
   const searchParams = useSearchParams();
@@ -12,10 +13,13 @@ export default function CheckoutReturnPage() {
 
   const clear = useCart((s) => s.clear || (() => {}));
 
+  // const queryClient = useQueryClient();
+
   useEffect(() => {
     if (typeof clear === "function") {
       clear();
     }
+    // queryClient.invalidateQueries({ queryKey: "orders" });
   }, [clear]);
 
   return (
