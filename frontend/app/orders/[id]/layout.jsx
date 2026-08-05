@@ -1,9 +1,5 @@
-import { usePathname } from "next/navigation";
-import { use } from "react";
+import OrderLayout from "@/components/OrderLayout";
 
-export default function OrderDetailLayout({children, params}){
-     const {id} = use(params)
-     const pathname = usePathname()
-
-     
+export default function OrderDetailLayout({ children, params }) {
+  return <OrderLayout params={params}>{children}</OrderLayout>;
 }
