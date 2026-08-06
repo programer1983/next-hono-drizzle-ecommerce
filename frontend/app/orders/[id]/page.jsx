@@ -1,3 +1,3 @@
-export default function OrderDetail() {
-  return <djv>test</djv>;
+export default function OrderSummary() {
+  return <div>test</div>;
 }

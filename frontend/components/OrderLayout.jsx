@@ -2,6 +2,7 @@
 
 import { OrderDetailSkeleton } from "@/components/LoadingSkeletons";
 import PageError from "@/components/PageError";
+import { OrderProvider } from "@/context/OrderContext";
 import { useOrderDetailPage } from "@/hooks/useOrderDetailPage";
 import { formatOrderWhen, formatPrice } from "@/utils/format";
 import {
@@ -133,7 +134,11 @@ export default function OrderLayout({ children, params }) {
               </span>
             </div>
           ) : null}
-          <div className="mt-5">{children}</div>
+          <div className="mt-5">
+            <OrderProvider value={{ order, items, paid }}>
+              {children}
+            </OrderProvider>
+          </div>
         </div>
       </div>
     </div>
