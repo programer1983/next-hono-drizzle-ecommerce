@@ -13,6 +13,8 @@ export function useOrderDetailPage() {
     enabled: Boolean(id),
   });
 
+  console.log("order data:", data);
+
   const order = data?.order ?? null;
   const items = data?.items ?? [];
   const paid = order?.status === "paid";

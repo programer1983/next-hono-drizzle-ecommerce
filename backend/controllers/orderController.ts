@@ -105,10 +105,11 @@ export async function getOrder(c: Context) {
 
   const items = await db
     .select({
-      orderId: orderItems.id,
+      id: orderItems.id,
+      orderId: orderItems.orderId,
       quantity: orderItems.quantity,
       unitPriceCents: orderItems.unitPriceCents,
-      products: products,
+      product: products,
     })
     .from(orderItems)
     .innerJoin(products, eq(orderItems.productId, products.id))
@@ -124,7 +125,7 @@ export async function createStreamChannel(c: Context) {
     return c.json({ error: "Unauthorized" }, 401);
   }
 
-  const server = getStreamChatServer(c.env);
+  const server = getStreamChatServer(c);
   const localUser = await getLocalUser(userId);
   if (!localUser) {
     return c.json({ error: "Account not synced yet" }, 503);
@@ -206,7 +207,7 @@ export async function createVideoInvite(c: Context) {
     return c.json({ error: "Unauthorized" }, 401);
   }
 
-  const server = getStreamChatServer(c.env);
+  const server = getStreamChatServer(c);
   const localUser = await getLocalUser(userId);
   if (!localUser) {
     return c.json({ error: "Account not synced yet" }, 503);

@@ -1,3 +1,5 @@
+"use client";
+
 import { OrderChatPanelSkeleton } from "@/components/LoadingSkeletons";
 import PageError from "@/components/PageError";
 import { useOrderChatPage } from "@/hooks/useOrderChatPage";
@@ -8,10 +10,10 @@ import {
   Window,
   ChannelHeader,
   MessageList,
-  MessageInput,
+  MessageComposer,
   Thread,
 } from "stream-chat-react";
-import "stream-chat-react/dist/css/v2/index.css";
+import "stream-chat-react/dist/css/index.css";
 
 function ChatPage() {
   const { paid, client, error, channel, canInvite, inviteMutation } =
@@ -80,12 +82,12 @@ function ChatPage() {
         </div>
       </div>
       <div className="stream-panel h-140 overflow-hidden rounded-box border border-neutral-700 bg-neutral-950 [&_.str-chat\_\_main-panel]:min-h-0">
-        <Chat channel={channel}>
+        <Chat client={client} theme="messaging str-chat__theme-dark">
           <Channel>
             <Window>
               <ChannelHeader />
               <MessageList />
-              <MessageInput focus />
+              <MessageComposer />
             </Window>
             <Thread />
           </Channel>

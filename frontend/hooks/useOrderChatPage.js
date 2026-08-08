@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth } from "@clerk/nextjs";
 import { useParams } from "next/navigation";
 import { useOrderDetailPage } from "./useOrderDetailPage";
@@ -28,7 +30,7 @@ export function useOrderChatPage() {
   });
 
   useEffect(() => {
-    if (!paid || !id) return undefined;
+    if (!id) return undefined;
 
     let chatClient;
 
@@ -38,15 +40,17 @@ export function useOrderChatPage() {
         method: "POST",
       });
 
-      const token = await apiFetch("/api/stream/token", {
+      const tokenData = await apiFetch("/api/stream/token", {
         getToken,
         method: "POST",
       });
-      chatClient = StreamChat.getInstance(token.apiKey);
+
+      console.log("tokenData:", tokenData);
+      chatClient = StreamChat.getInstance(tokenData.apiKey);
 
       await chatClient.connectUser(
-        { id: token.userId, name: token.name },
-        token.token,
+        { id: tokenData.userId, name: tokenData.name },
+        tokenData.token,
       );
       const channel = chatClient.channel("messaging", `order-${id}`);
 

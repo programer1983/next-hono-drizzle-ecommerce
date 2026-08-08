@@ -20,47 +20,7 @@ export default function OrderLayout({ children, params }) {
   const { id } = use(params);
   const pathname = usePathname();
 
-  // const { isLoading, error, order, items, paid } = useOrderDetailPage(id);
-
-  const isLoading = false;
-  const error = null;
-  const paid = true;
-
-  const order = {
-    id: id || "order_fake_id_999999",
-    status: paid ? "paid" : "pending",
-    createdAt: new Date().toISOString(),
-    totalCents: 15450,
-  };
-
-  const items = [
-    {
-      id: "item_1",
-      quantity: 1,
-      unitPriceCents: 9900,
-      product: {
-        slug: "premium-subscription",
-        name: "Premium Subscription",
-        category: "Services",
-        currency: "usd",
-        imageUrl:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTUlXgvka7Ev3iY1d5oTz21tW7XrI9H-eyDvF46JIWGA&s",
-      },
-    },
-    {
-      id: "item_2",
-      quantity: 1,
-      unitPriceCents: 5550,
-      product: {
-        slug: "setup-fee",
-        name: "Initial Setup Fee",
-        category: "Onboarding",
-        currency: "usd",
-        imageUrl: null,
-      },
-    },
-  ];
-  // ====================================================
+  const { isLoading, error, order, items, paid } = useOrderDetailPage(id);
 
   if (isLoading) {
     return <OrderDetailSkeleton />;

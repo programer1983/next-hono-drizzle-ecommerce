@@ -24,7 +24,9 @@ export async function createStreamToken(c: Context<Env>) {
 
     const server = getStreamChatServer(c);
 
-    const clerk = createClerkClient({ secretKey: c.env.CLERK_SECRET_KEY });
+    const clerk = createClerkClient({
+      secretKey: c.env?.CLERK_SECRET_KEY ?? process.env.CLERK_SECRET_KEY,
+    });
 
     const clerkUser = await clerk.users.getUser(userId);
 
@@ -51,7 +53,7 @@ export async function createStreamToken(c: Context<Env>) {
 
     return c.json({
       token,
-      apiKey: c.env.STREAM_API_KEY,
+      apiKey: c.env?.STREAM_API_KEY ?? process.env.STREAM_API_KEY,
       userId: sid,
       name,
       image,

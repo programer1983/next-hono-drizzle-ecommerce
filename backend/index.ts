@@ -50,6 +50,8 @@ app.use(
   cors({
     origin: env.FRONTEND_URL,
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   }),
 );
 
@@ -98,6 +100,11 @@ app.onError((err, c) => {
 const port = env.PORT;
 
 console.log(`Server is running on port ${port}`);
+
+// app.onError((err, c) => {
+//   console.error("GLOBAL ERROR:", err.message, err.stack);
+//   return c.json({ error: err.message }, 500);
+// });
 
 serve({
   fetch: app.fetch,

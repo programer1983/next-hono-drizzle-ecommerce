@@ -21,8 +21,17 @@ export function streamChatDisplayName(
   return base;
 }
 
-export function getStreamChatServer(c: Context<Env>) {
-  return StreamChat.getInstance(c.env.STREAM_API_KEY, c.env.STREAM_API_SECRET);
+// export function getStreamChatServer(c: Context<Env>) {
+//   return StreamChat.getInstance(c.env.STREAM_API_KEY, c.env.STREAM_API_SECRET);
+// }
+
+export function getStreamChatServer(envOrContext?: Context<Env>) {
+  const apiKey =
+    envOrContext?.env?.STREAM_API_KEY ?? process.env.STREAM_API_KEY ?? "";
+  const apiSecret =
+    envOrContext?.env?.STREAM_API_SECRET ?? process.env.STREAM_API_SECRET ?? "";
+
+  return StreamChat.getInstance(apiKey, apiSecret);
 }
 
 export function streamUserId(clerkUserId: string): string {
