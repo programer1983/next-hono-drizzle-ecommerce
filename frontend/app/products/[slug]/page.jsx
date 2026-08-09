@@ -8,7 +8,7 @@ import {
   imageKitOptimizedUrl,
   imageKitWatermarkedUrl,
 } from "@/lib/imagekitUrl";
-import { useCart } from "@/store/cart";
+import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/utils/format";
 import { ArrowLeftIcon, CheckIcon, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";

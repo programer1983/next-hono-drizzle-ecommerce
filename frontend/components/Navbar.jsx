@@ -1,7 +1,7 @@
 "use client";
 
 import { apiFetch } from "@/lib/api";
-import { useCart } from "@/store/cart";
+import { useCart } from "@/hooks/useCart";
 import { Show, SignInButton, useAuth, UserButton } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -13,6 +13,7 @@ import {
   StoreIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const { getToken, isSignedIn } = useAuth();

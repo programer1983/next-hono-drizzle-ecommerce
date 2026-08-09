@@ -1,5 +1,5 @@
 import { imageKitOptimizedUrl, IK_PRESETS } from "@/lib/imagekitUrl";
-import { useCart } from "@/store/cart";
+import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/utils/format";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";

@@ -1,5 +1,5 @@
 import { apiFetch } from "@/lib/api";
-import { useCart } from "@/store/cart";
+import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
