@@ -85,7 +85,12 @@ app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
 });
 
+const port = env.PORT;
+
+console.log(`Server is running on port ${port}`);
+
 app.onError((err, c) => {
+  console.error("GLOBAL ERROR:", err.message, err.stack);
   Sentry.captureException(err);
 
   return c.json(
@@ -96,15 +101,6 @@ app.onError((err, c) => {
     500,
   );
 });
-
-const port = env.PORT;
-
-console.log(`Server is running on port ${port}`);
-
-// app.onError((err, c) => {
-//   console.error("GLOBAL ERROR:", err.message, err.stack);
-//   return c.json({ error: err.message }, 500);
-// });
 
 serve({
   fetch: app.fetch,

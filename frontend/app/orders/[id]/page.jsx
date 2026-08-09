@@ -29,7 +29,7 @@ function OrderSummary() {
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6 sm:justify-between">
               <div className="flex flex-1 gap-4">
                 <Link
-                  href={`/product/${row.product?.slug || "#"}`}
+                  href={`/products/${row.product?.slug || "#"}`}
                   className="group/img relative shrink-0 overflow-hidden rounded-xl border border-base-300 bg-base-200 shadow-sm ring-1 ring-base-300/30 transition hover:ring-primary/40 "
                 >
                   <div className="h-24 w-24 sm:h-28 sm:w-28">
@@ -56,7 +56,7 @@ function OrderSummary() {
                 </Link>
                 <div className="min-w-0 flex-1">
                   <Link
-                    href={`/product/${row.product?.slug}`}
+                    href={`/products/${row.product?.slug}`}
                     className="link link-hover text-lg font-semibold leading-snug text-base-content"
                   >
                     {row.product?.name}
