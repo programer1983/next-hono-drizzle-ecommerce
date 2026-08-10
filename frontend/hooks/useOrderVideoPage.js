@@ -33,6 +33,7 @@ function useOrderVideoPage() {
 
     let videoClient;
     let activeCall;
+    let mounted = true;
 
     async function connectOrderVideo() {
       const token = await apiFetch("/api/stream/token", {
@@ -48,15 +49,24 @@ function useOrderVideoPage() {
 
       activeCall = videoClient.call("default", `order-${id}`);
       await activeCall.join({ create: true });
+
+      if (!mounted) {
+        activeCall?.leave().catch(() => {});
+        videoClient?.disconnectUser().catch(() => {});
+        return;
+      }
+
       setClient(videoClient);
       setCall(activeCall);
     }
 
     connectOrderVideo().catch((e) => {
-      setError(e instanceof Error ? e.message : "Video failed to start");
+      if (mounted)
+        setError(e instanceof Error ? e.message : "Video failed to start");
     });
 
     return () => {
+      mounted = false;
       activeCall?.leave().catch(() => {});
       videoClient?.disconnectUser().catch(() => {});
     };
