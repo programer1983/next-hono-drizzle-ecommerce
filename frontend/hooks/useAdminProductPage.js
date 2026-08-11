@@ -1,3 +1,5 @@
+"use client";
+
 import { apiFetch } from "@/lib/api";
 import { useAuth } from "@clerk/nextjs";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
