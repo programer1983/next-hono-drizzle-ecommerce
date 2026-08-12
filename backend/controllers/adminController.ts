@@ -77,7 +77,7 @@ export async function getImageKitAuth(c: Context) {
 
   return c.json({
     ...auth,
-    publickKey: env.IMAGEKIT_PUBLIC_KEY,
+    publicKey: env.IMAGEKIT_PUBLIC_KEY,
     urlEndpoint: env.IMAGEKIT_URL_ENDPOINT,
   });
 }

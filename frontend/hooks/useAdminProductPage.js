@@ -40,6 +40,9 @@ export function useAdminProductPage() {
         body,
       });
     },
+    onError: (err) => {
+      console.log("saveMutation error:", err); // ← добавь
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "products"] });
       queryClient.invalidateQueries({ queryKey: ["products"] });

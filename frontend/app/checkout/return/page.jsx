@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { CheckCircle2Icon, ShoppingBagIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
-import { useCart } from "@/store/cart";
+import { useCart } from "@/hooks/useCart";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function CheckoutReturnPage() {
