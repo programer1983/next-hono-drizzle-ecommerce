@@ -13,10 +13,10 @@ import {
   StoreIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { HeaderSkeleton } from "./LoadingSkeletons";
 
 const Navbar = () => {
-  const { getToken, isSignedIn } = useAuth();
+  const { getToken, isSignedIn, isLoaded } = useAuth();
 
   const { data: meData } = useQuery({
     queryKey: ["me"],
@@ -29,6 +29,10 @@ const Navbar = () => {
   const cartCount = useCart((s) =>
     s.items.reduce((n, line) => n + line.quantity, 0),
   );
+
+  if (!isLoaded) {
+    return <HeaderSkeleton />;
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100/95 shadow-sm backdrop-blur-md">

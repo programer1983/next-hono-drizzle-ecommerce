@@ -7,6 +7,7 @@ import { IK_PRESETS, imageKitOptimizedUrl } from "@/lib/imagekitUrl";
 import { formatPrice } from "@/utils/format";
 import { PackageIcon, PencilIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 function AdminProductPage() {
   const {
@@ -23,7 +24,14 @@ function AdminProductPage() {
     products,
   } = useAdminProductPage();
 
+  const { isLoaded, userId } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (isLoaded && !userId) {
+      router.push("/");
+    }
+  }, [isLoaded, userId, router]);
 
   if (meData && meData.user?.role !== "admin") {
     router.push("/");
