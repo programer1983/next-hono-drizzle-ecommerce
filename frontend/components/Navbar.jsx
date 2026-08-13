@@ -45,23 +45,31 @@ const Navbar = () => {
             <span className="flex size-10 justify-center items-center rounded-lg bg-primary/15 p-1 text-primary">
               <StoreIcon className="size-8" aria-hidden />
             </span>
-            <span className="leading-none">Northwind</span>
+            <span className="leading-none hidden sm:inline-block">
+              Northwind
+            </span>
           </Link>
         </div>
         <nav className="flex items-center gap-1 md:gap-1.5">
-          <Link href="/" className="btn btn-ghost gap-2 font-medium">
+          <Link
+            href="/"
+            className="btn btn-ghost btn-xs sm:btn-md gap-2 font-medium"
+          >
             <ShoppingBagIcon className="size-6 opacity-90" aria-hidden />
             <span className="hidden sm:inline">Shop</span>
           </Link>
           <Show when="signed-in">
-            <Link href="/orders" className="btn btn-ghost gap-2 font-medium">
+            <Link
+              href="/orders"
+              className="btn btn-ghost btn-xs sm:btn-md gap-2 font-medium"
+            >
               <PackageIcon className="size-6 opacity-90" aria-hidden />
               <span className="hidden sm:inline">Orders</span>
             </Link>
             {role === "admin" ? (
               <Link
                 href="/admin"
-                className="btn btn-ghost gap-2 font-medium text-secondary"
+                className="btn btn-ghost btn-xs sm:btn-md gap-2 font-medium text-secondary"
               >
                 <SettingsIcon className="size-6 opacity-90" aria-hidden />
                 <span className="hidden sm:inline">Admin</span>
@@ -70,7 +78,7 @@ const Navbar = () => {
           </Show>
           <Link
             href="/cart"
-            className="btn btn-ghost gap-2 font-medium indicator"
+            className="btn btn-ghost btn-xs sm:btn-md gap-2 font-medium indicator"
             aria-label={cartCount > 0 ? `Cart, ${cartCount} items` : "Cart"}
           >
             {cartCount > 0 ? (
@@ -85,7 +93,7 @@ const Navbar = () => {
             <SignInButton mode="modal">
               <button
                 type="button"
-                className="btn btn-primary btn-sm gap-1.5 px-3 shadow-md ml-10"
+                className="btn btn-primary btn-sm sm:btn-md gap-1.5 px-3 shadow-md ml-10"
               >
                 <LogInIcon className="size-4 drop-shadow-sm" aria-hidden />
                 Sign In

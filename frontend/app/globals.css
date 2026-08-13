@@ -4,3 +4,23 @@
 @plugin "daisyui" {
   themes: forest --default;
 }
+
+@media (max-width: 767.98px) {
+  .preview-order-image {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media (max-width: 380px) {
+  .preview-order-image {
+    width: 270px;
+    height: 270px;
+  }
+}
+@media (max-width: 330px) {
+  .preview-order-image {
+    width: 250px;
+    height: 250px;
+  }
+}

@@ -44,7 +44,7 @@ export default function OrderLayout({ children, params }) {
   };
 
   return (
-    <div className="space-y-8 text-left max-w-7xl mx-auto">
+    <div className="space-y-8 text-left max-w-7xl mx-auto px-2.5 md:px-5">
       <Link
         href="/orders"
         className="btn btn-sm btn-ghost gap-2 px-0 text-base-content/70 hover:text-primary"

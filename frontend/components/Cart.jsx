@@ -32,10 +32,13 @@ function Cart() {
   } = useCartPage();
 
   return (
-    <div className="text-left">
-      <h1 className="mb-8 flex items-center gap-2 text-3xl font-bold text-base-content">
-        <ShoppingCartIcon className="size-8 text-primary" aria-hidden />
-        Cart
+    <div className="text-left px-2.5 md:px-5">
+      <h1 className="mb-1 md:mb-8 flex items-center gap-2 text-3xl font-bold text-base-content">
+        <ShoppingCartIcon
+          className="size-6 md:size-8 text-primary"
+          aria-hidden
+        />
+        <span className="text-2xl md:text-4xl">Cart</span>
       </h1>
       {items.length === 0 ? (
         <EmptyCart />
@@ -53,7 +56,7 @@ function Cart() {
             {lines.map(({ line, product: p }) => (
               <li
                 key={line.productId}
-                className="card card-side border border-base-300 bg-base-100 shadow-sm"
+                className="card md:card-side  border border-base-300 bg-base-100 shadow-sm"
               >
                 <figure className="p-4">
                   {p?.imageUrl ? (
@@ -63,7 +66,7 @@ function Cart() {
                         IK_PRESETS.cartThumb,
                       )}
                       alt=""
-                      className="h-24 w-24 rounded-box object-cover"
+                      className="h-80 w-80 md:h-24 md:w-24 rounded-box object-cover"
                       loading="lazy"
                       decoding="async"
                     />

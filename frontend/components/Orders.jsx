@@ -42,10 +42,12 @@ export default function Orders() {
   }
 
   return (
-    <div className="text-left">
+    <div className="text-left px-2.5 md:px-5">
       <h1 className="mb-8 flex items-center gap-2 text-3xl font-bold text-base-content">
-        <PackageIcon className="size-8 text-primary" aria-hidden />
-        {staff ? "Orders" : "Your orders"}
+        <PackageIcon className="size-6 md:size-8 text-primary" aria-hidden />
+        <span className="text-2xl md:text-4xl">
+          {staff ? "Orders" : "Your orders"}
+        </span>
       </h1>
 
       <p className="mb-8 text-sm text-base-content">
@@ -80,9 +82,9 @@ export default function Orders() {
               <li key={o.id}>
                 <Link
                   href={`/orders/${o.id}`}
-                  className="group card border border-base-300 bg-base-100 shadow-sm transition hover:border-primary/45 hover:shadow-md"
+                  className="group card  border border-base-300 bg-base-100 shadow-sm transition hover:border-primary/45 hover:shadow-md"
                 >
-                  <div className="card-body flex-row flex-wrap items-center gap-4 py-5 sm:gap-5">
+                  <div className="card-body md:flex-row flex-wrap items-center gap-4 py-5 sm:gap-5">
                     <OrderPreview items={previewItems} />
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-2">

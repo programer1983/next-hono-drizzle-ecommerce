@@ -64,7 +64,7 @@ export default function OrderPreview({ items, size = "md" }) {
 
   return (
     <div
-      className={`grid shrink-0 grid-cols-2 grid-rows-2 gap-0.5 overflow-hidden rounded-2xl border border-base-300 bg-base-200/90 p-0.5 shadow-md ring-1 ring-base-300/40 ${box}`}
+      className={`preview-order-image grid shrink-0 grid-cols-2 grid-rows-2 gap-0.5 overflow-hidden rounded-2xl border border-base-300 bg-base-200/90 p-0.5 shadow-md ring-1 ring-base-300/40 ${box}`}
     >
       {show.map((p, i) => (
         <div

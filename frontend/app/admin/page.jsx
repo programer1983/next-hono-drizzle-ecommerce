@@ -8,6 +8,7 @@ import { formatPrice } from "@/utils/format";
 import { PackageIcon, PencilIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import { useEffect } from "react";
 
 function AdminProductPage() {
   const {
@@ -45,7 +46,7 @@ function AdminProductPage() {
   }
 
   return (
-    <div className="text-left mx-auto max-w-7xl">
+    <div className="text-left mx-auto max-w-7xl px-2.5 md:px-5">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <PackageIcon className="size-8 text-secondary" aria-hidden />

@@ -47,6 +47,7 @@ export function useAdminProductPage() {
       queryClient.invalidateQueries({ queryKey: ["admin", "products"] });
       queryClient.invalidateQueries({ queryKey: ["products"] });
       queryClient.invalidateQueries({ queryKey: ["product-categories"] });
+      queryClient.invalidateQueries({ queryKey: ["order"] });
       setModalOpen(false);
       setEditing(null);
     },

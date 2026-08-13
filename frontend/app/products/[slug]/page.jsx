@@ -41,7 +41,7 @@ function ProductDeatailPage() {
     : null;
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto px-3.5 md:px-5">
       <nav className="breadcrumbs text-sm text-base-content/60">
         <ul>
           <li>

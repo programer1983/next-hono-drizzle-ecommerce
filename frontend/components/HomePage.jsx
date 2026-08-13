@@ -30,7 +30,10 @@ export default function Home() {
     <div className="space-y-12">
       <HomeHero categories={categories} loadingCategories={loadingCategories} />
       <TrustStrip />
-      <section id="catalog" className="scroll-mt-24 max-w-7xl mx-auto">
+      <section
+        id="catalog"
+        className="scroll-mt-24 max-w-7xl mx-auto px-2.5 md:px-5"
+      >
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-base-content md:text-xl uppercase font-mono">
