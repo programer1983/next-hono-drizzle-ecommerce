@@ -5,14 +5,19 @@
       "framework": "nextjs"
     },
     "backend": {
-      "root": "backend",
-      "framework": "hono",
-      "entrypoint": "index.ts"
+      "root": "backend"
     }
   },
   "rewrites": [
     {
-      "source": "/api/backend/:path*",
+      "source": "/api/backend",
+      "destination": {
+        "type": "service",
+        "service": "backend"
+      }
+    },
+    {
+      "source": "/api/backend/(.*)",
       "destination": {
         "type": "service",
         "service": "backend"
