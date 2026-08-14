@@ -19,7 +19,6 @@ import orderRouter from "./routes/orderRouter.js";
 import { sentryClerkUserMiddleware } from "./middleware/sentryClerckUser.js";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
-import { handle } from "@hono/node-server/vercel";
 
 const env = getEnv();
 
@@ -120,12 +119,5 @@ if (process.env.NODE_ENV !== "production") {
     port,
   });
 }
-
-export const GET = handle(app);
-export const POST = handle(app);
-export const PUT = handle(app);
-export const PATCH = handle(app);
-export const DELETE = handle(app);
-export const OPTIONS = handle(app);
 
 export default app;

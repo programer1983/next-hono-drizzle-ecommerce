@@ -5,9 +5,7 @@
       "framework": "nextjs"
     },
     "backend": {
-      "root": "backend",
-      "framework": "hono",
-      "entrypoint": "index.ts"
+      "root": "backend"
     }
   },
   "rewrites": [
