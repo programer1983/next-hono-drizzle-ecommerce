@@ -24,9 +24,9 @@ const env = getEnv();
 
 const app = new Hono();
 
-if (process.env.VERCEL) {
-  app.basePath("/api/backend");
-}
+// if (process.env.VERCEL) {
+//   app.basePath("/api/backend");
+// }
 
 const pool = new pg.Pool({
   connectionString: env.DATABASE_URL,

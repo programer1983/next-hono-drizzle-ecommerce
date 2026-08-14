@@ -14,14 +14,12 @@
     {
       "source": "/api/backend",
       "destination": {
-        "type": "service",
         "service": "backend"
       }
     },
     {
       "source": "/api/backend/:path*",
       "destination": {
-        "type": "service",
         "service": "backend",
         "path": "/:path*"
       }
@@ -29,7 +27,6 @@
     {
       "source": "/(.*)",
       "destination": {
-        "type": "service",
         "service": "frontend"
       }
     }
