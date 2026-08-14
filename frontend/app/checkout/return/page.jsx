@@ -3,23 +3,18 @@
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2Icon, ShoppingBagIcon } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useCart } from "@/hooks/useCart";
-import { useQueryClient } from "@tanstack/react-query";
 
-export default function CheckoutReturnPage() {
+function CheckoutReturnContent() {
   const searchParams = useSearchParams();
   const checkoutId = searchParams.get("checkout_id");
-
   const clear = useCart((s) => s.clear || (() => {}));
-
-  // const queryClient = useQueryClient();
 
   useEffect(() => {
     if (typeof clear === "function") {
       clear();
     }
-    // queryClient.invalidateQueries({ queryKey: "orders" });
   }, [clear]);
 
   return (
@@ -52,5 +47,19 @@ export default function CheckoutReturnPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutReturnPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      }
+    >
+      <CheckoutReturnContent />
+    </Suspense>
   );
 }
