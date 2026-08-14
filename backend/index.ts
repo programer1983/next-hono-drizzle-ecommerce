@@ -8,6 +8,7 @@ import { cors } from "hono/cors";
 import { clerkMiddleware } from "@clerk/hono";
 import { bodyLimit } from "hono/body-limit";
 import { clerkWebhookHandler } from "./webhooks/clerk.js";
+import { polarWebhookHandler } from "./webhooks/polar.js";
 import { getEnv } from "./lib/validation.js";
 import meRouter from "./routes/meRoute.js";
 import productRouter from "./routes/productRouter.js";
@@ -15,13 +16,18 @@ import streamRouter from "./routes/streamRouter.js";
 import checkoutRouter from "./routes/checkoutRouter.js";
 import adminRouter from "./routes/adminRouter.js";
 import orderRouter from "./routes/orderRouter.js";
-import { polarWebhookHandler } from "./webhooks/polar.js";
 import { sentryClerkUserMiddleware } from "./middleware/sentryClerckUser.js";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
+import { handle } from "@hono/node-server/vercel";
+
 const env = getEnv();
 
 const app = new Hono();
+
+if (process.env.VERCEL) {
+  app.basePath("/api/backend");
+}
 
 const pool = new pg.Pool({
   connectionString: env.DATABASE_URL,
@@ -84,6 +90,12 @@ app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
 });
 
+if (process.env.VERCEL) {
+  app.get("/api/backend", (c) => {
+    return c.text("Hello Dimon!!!");
+  });
+}
+
 const port = env.PORT;
 
 console.log(`Server is running on port ${port}`);
@@ -108,5 +120,12 @@ if (process.env.NODE_ENV !== "production") {
     port,
   });
 }
+
+export const GET = handle(app);
+export const POST = handle(app);
+export const PUT = handle(app);
+export const PATCH = handle(app);
+export const DELETE = handle(app);
+export const OPTIONS = handle(app);
 
 export default app;
