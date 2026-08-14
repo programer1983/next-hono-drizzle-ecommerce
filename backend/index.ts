@@ -87,6 +87,11 @@ app.get("/", (c) => {
 
 const port = env.PORT;
 
+const server = serve({
+  fetch: app.fetch,
+  port,
+});
+
 console.log(`Server is running on port ${port}`);
 
 app.onError((err, c) => {
@@ -102,12 +107,4 @@ app.onError((err, c) => {
   );
 });
 
-if (process.env.NODE_ENV !== "production") {
-  console.log(`Server is running on port ${port}`);
-  serve({
-    fetch: app.fetch,
-    port,
-  });
-}
-
-export default app;
+export default server;
