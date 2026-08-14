@@ -7,7 +7,7 @@
     "backend": {
       "root": "backend",
       "framework": "node",
-      "entrypoint": "dist/index.js"
+      "entrypoint": "index.ts"
     }
   },
   "rewrites": [
