@@ -24,10 +24,6 @@ const env = getEnv();
 
 const app = new Hono();
 
-// if (process.env.VERCEL) {
-//   app.basePath("/api/backend");
-// }
-
 const pool = new pg.Pool({
   connectionString: env.DATABASE_URL,
   max: 5,
@@ -88,12 +84,6 @@ app.post("/webhooks/polar", polarWebhookHandler);
 app.get("/", (c) => {
   return c.text("Hello Dimon!!!");
 });
-
-if (process.env.VERCEL) {
-  app.get("/api/backend", (c) => {
-    return c.text("Hello Dimon!!!");
-  });
-}
 
 const port = env.PORT;
 
