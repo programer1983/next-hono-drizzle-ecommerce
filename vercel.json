@@ -7,7 +7,11 @@
     "backend": {
       "root": "backend",
       "framework": "node",
-      "entrypoint": "index.ts"
+      "entrypoint": "index.ts",
+      "environmentVariables": {
+        "CLERK_SECRET_KEY": "@clerk_secret_key",
+        "DATABASE_URL": "@database_url"
+      }
     }
   },
   "rewrites": [
