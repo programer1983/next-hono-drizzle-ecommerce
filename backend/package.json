@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch index.ts",
-    "build": "tsc && mkdir -p .vercel/output/functions && cp -r dist/* .vercel/output/functions/ || echo 'Done'",
+    "build": "echo 'Vercel will handle compilation'",
     "start": "node dist/index.js",
     "db:seed": "tsx scripts/seed.ts"
   },
