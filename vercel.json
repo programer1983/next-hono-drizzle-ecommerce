@@ -6,7 +6,7 @@
     },
     "backend": {
       "root": "backend",
-      "framework": "hono",
+      "framework": "node",
       "entrypoint": "index.ts"
     }
   },
