@@ -1,7 +1,6 @@
 import "dotenv/config";
 import * as Sentry from "@sentry/hono/node";
 import { nodeProfilingIntegration } from "@sentry/profiling-node";
-
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
@@ -87,11 +86,6 @@ app.get("/", (c) => {
 
 const port = env.PORT;
 
-const server = serve({
-  fetch: app.fetch,
-  port,
-});
-
 console.log(`Server is running on port ${port}`);
 
 app.onError((err, c) => {
@@ -107,4 +101,13 @@ app.onError((err, c) => {
   );
 });
 
-export default server;
+if (process.env.NODE_ENV !== "production") {
+  const port = env.PORT || 3000;
+  serve({
+    fetch: app.fetch,
+    port: Number(port),
+  });
+  console.log(`Local server is running on port ${port}`);
+}
+
+export default app;

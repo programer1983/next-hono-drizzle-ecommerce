@@ -7,32 +7,21 @@
     "backend": {
       "root": "backend",
       "framework": "node",
-      "entrypoint": "index.ts",
-      "environmentVariables": {
-        "CLERK_SECRET_KEY": "@clerk_secret_key",
-        "DATABASE_URL": "@database_url"
-      }
+      "entrypoint": "index.ts"
     }
   },
   "rewrites": [
     {
       "source": "/api/backend",
-      "destination": {
-        "service": "backend"
-      }
+      "destination": { "service": "backend", "path": "/" }
     },
     {
       "source": "/api/backend/:path*",
-      "destination": {
-        "service": "backend",
-        "path": "/:path*"
-      }
+      "destination": { "service": "backend", "path": "/:path*" }
     },
     {
       "source": "/(.*)",
-      "destination": {
-        "service": "frontend"
-      }
+      "destination": { "service": "frontend" }
     }
   ]
 }
