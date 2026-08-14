@@ -5,12 +5,20 @@
       "framework": "nextjs"
     },
     "backend": {
-      "root": "backend"
+      "root": "backend",
+      "framework": "hono"
     }
   },
   "rewrites": [
     {
-      "source": "/api/backend(/.*)?",
+      "source": "/api/(.*)",
+      "destination": {
+        "type": "service",
+        "service": "backend"
+      }
+    },
+    {
+      "source": "/webhooks/(.*)",
       "destination": {
         "type": "service",
         "service": "backend"
