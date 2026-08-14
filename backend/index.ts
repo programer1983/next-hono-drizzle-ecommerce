@@ -21,7 +21,7 @@ import pg from "pg";
 
 const env = getEnv();
 
-const app = new Hono();
+const app = new Hono().basePath("/api/backend");
 
 const pool = new pg.Pool({
   connectionString: env.DATABASE_URL,
