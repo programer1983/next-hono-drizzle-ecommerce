@@ -1,17 +1,27 @@
 {
-  "version": 2,
+  "services": {
+    "frontend": {
+      "root": "frontend",
+      "framework": "nextjs"
+    },
+    "backend": {
+      "root": "backend"
+    }
+  },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/backend/index.ts"
-    },
-    {
-      "source": "/webhooks/(.*)",
-      "destination": "/backend/index.ts"
+      "source": "/api/backend(/.*)?",
+      "destination": {
+        "type": "service",
+        "service": "backend"
+      }
     },
     {
       "source": "/(.*)",
-      "destination": "/frontend/$1"
+      "destination": {
+        "type": "service",
+        "service": "frontend"
+      }
     }
   ]
 }
