@@ -93643,9 +93643,6 @@ function init3(options2) {
 // node_modules/@sentry/hono/build/esm/index.node.js
 earlyPatchHono();
 
-// index.mts
-import { nodeProfilingIntegration } from "@sentry/profiling-node";
-
 // node_modules/@hono/node-server/dist/constants-BLSFu_RU.mjs
 var X_ALREADY_SENT = "x-hono-already-sent";
 
@@ -134879,7 +134876,7 @@ if (env4.SENTRY_DSN) {
     enableLogs: true,
     tracesSampleRate: 1,
     sendDefaultPii: true,
-    integrations: [nodeProfilingIntegration()],
+    // integrations: [nodeProfilingIntegration()],
     profilesSampleRate: 1
   });
 }

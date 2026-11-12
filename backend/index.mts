@@ -1,6 +1,6 @@
 import "dotenv/config";
 import * as Sentry from "@sentry/hono/node";
-import { nodeProfilingIntegration } from "@sentry/profiling-node";
+// import { nodeProfilingIntegration } from "@sentry/profiling-node";
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
@@ -37,7 +37,7 @@ if (env.SENTRY_DSN) {
     enableLogs: true,
     tracesSampleRate: 1.0,
     sendDefaultPii: true,
-    integrations: [nodeProfilingIntegration()],
+    // integrations: [nodeProfilingIntegration()],
     profilesSampleRate: 1.0,
   } as Sentry.NodeOptions);
 }
