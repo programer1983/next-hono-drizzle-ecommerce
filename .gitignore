@@ -14,3 +14,4 @@ backend/build/
 # Секреты
 .env
 *.env.local
+.env.sentry-build-plugin
