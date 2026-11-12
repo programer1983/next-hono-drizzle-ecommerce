@@ -8,11 +8,14 @@ frontend/.next/
 frontend/out/
 
 # Бэкенд (TypeScript сборка)
-backend/dist/
+# backend/dist/
 backend/build/
 
 # Секреты
 .env
 *.env.local
 .env.sentry-build-plugin
+
+# Разрешаем собранный бандл бэкенда для Vercel
 !backend/dist/
+!backend/dist/**

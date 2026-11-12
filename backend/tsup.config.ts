@@ -4,6 +4,9 @@ export default defineConfig({
   entry: ["index.mts"],
   format: ["esm"],
   outDir: "dist",
+  outExtension() {
+    return { js: ".mjs" };
+  },
   splitting: false,
   clean: true,
   noExternal: [
